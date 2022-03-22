@@ -6,14 +6,14 @@ from datetime import datetime, timedelta
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 
 
-def print_hi(name):
+def read_mail(mailbox):
     # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+    print(f'Mailbox: {mailbox}')  # Press Ctrl+F8 to toggle the breakpoint.
     outlook = win32com.client.Dispatch('outlook.application')
     mapi = outlook.GetNamespace("MAPI")
     for account in mapi.Accounts:
         print(account.DeliveryStore.DisplayName)
-        if (account.DeliveryStore.DisplayName == "ed@leijnse.info"):
+        if (account.DeliveryStore.DisplayName == mailbox):
             inbox = mapi.GetDefaultFolder(6)
             messages = inbox.Items
             for message in list(messages):
@@ -23,6 +23,6 @@ def print_hi(name):
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
+    read_mail('ed@leijnse.info')
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
